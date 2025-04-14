@@ -1,0 +1,16 @@
+<headerDto class="headerDto" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">
+        <img src="https://cjconnect-common.s3.ap-northeast-2.amazonaws.com/57.png">&nbsp; {{site.title}}</a>
+        <div class="navbar-item">
+          <input id="search-input" type="text" placeholder="Search docs">
+        </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</headerDto>

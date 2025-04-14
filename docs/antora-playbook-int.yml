@@ -1,0 +1,16 @@
+site:
+  title: CJConnect Admin API Server Documentation
+  url: https://api-admin-int.unban.ai/cjconnect/admin/api/static/docs
+  start_page: demo::index.adoc
+content:
+  sources:
+    - url: ../
+      branches: HEAD
+      start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./supplemental-ui
+output:
+  dir: ./generated-docs

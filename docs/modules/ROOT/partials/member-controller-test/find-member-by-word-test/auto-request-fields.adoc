@@ -1,0 +1,9 @@
+|===
+|Path|Type|Optional|Description
+
+|id
+|Integer
+|true
+|
+
+|===

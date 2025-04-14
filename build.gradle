@@ -1,0 +1,91 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    jsondoclet
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+    set('javadocJsonDir', file("build/generated-javadoc-json"))
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    //json-doclet
+    jsondoclet("capital.scalable:spring-auto-restdocs-json-doclet-jdk9:2.0.11")
+
+    testImplementation "capital.scalable:spring-auto-restdocs-core:2.0.11"
+}
+
+task jsonDoclet(type: Javadoc, dependsOn: compileJava) {
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.compileClasspath
+    destinationDir = javadocJsonDir
+    options.docletpath = configurations.jsondoclet.files as List
+    options.doclet = 'capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet'
+    options.memberLevel = JavadocMemberLevel.PACKAGE
+    options.encoding = 'UTF-8'
+}
+
+//tasks.named('test') {
+//    useJUnitPlatform()
+//    systemProperty 'org.springframework.restdocs.outputDir', snippetsDir
+//    systemProperty 'org.springframework.restdocs.javadocJsonDir', javadocJsonDir
+//    outputs.dir snippetsDir
+//    dependsOn jsonDoclet
+//
+//    systemProperty "user.timezone", "UTC"
+//}
+test {
+    useJUnitPlatform()
+    systemProperty 'org.springframework.restdocs.outputDir', snippetsDir
+    systemProperty 'org.springframework.restdocs.javadocJsonDir', javadocJsonDir
+    outputs.dir snippetsDir
+    dependsOn jsonDoclet
+
+    systemProperty "user.timezone", "UTC"
+}
+
+//tasks.named('asciidoctor') {
+//    inputs.dir snippetsDir
+//    dependsOn test
+//    sourceDir 'src/docs/asciidoc'
+//    outputDir file('build/asciidoc')
+//}
+
+task prepareDocument(type: Copy) {
+    dependsOn test
+    from file("build/generated-snippets")
+    into file("docs/modules/ROOT/partials")
+}
+
+build {
+    dependsOn prepareDocument
+}
