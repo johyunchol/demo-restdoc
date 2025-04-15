@@ -1,0 +1,31 @@
+{
+  "operationId" : "get-users",
+  "summary" : "Get all users",
+  "description" : "Get all users",
+  "privateResource" : false,
+  "deprecated" : true,
+  "request" : {
+    "path" : "/api/members/1",
+    "method" : "POST",
+    "contentType" : "application/json;charset=UTF-8",
+    "schema" : null,
+    "headers" : [ ],
+    "pathParameters" : [ ],
+    "queryParameters" : [ ],
+    "formParameters" : [ ],
+    "requestFields" : [ ],
+    "example" : "{\n  \"id\" : 1\n}",
+    "securityRequirements" : null
+  },
+  "response" : {
+    "status" : 200,
+    "contentType" : "application/json;charset=UTF-8",
+    "schema" : {
+      "name" : "MemberRequestDto"
+    },
+    "headers" : [ ],
+    "responseFields" : [ ],
+    "example" : "{\"id\":1,\"name\":\"조현철1\",\"email\":\"kkensu@naver.com\"}"
+  },
+  "tags" : [ "User API" ]
+}

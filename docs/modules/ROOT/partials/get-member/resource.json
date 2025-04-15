@@ -1,0 +1,36 @@
+{
+  "operationId" : "get-member",
+  "summary" : null,
+  "description" : null,
+  "privateResource" : false,
+  "deprecated" : false,
+  "request" : {
+    "path" : "/api/members/1",
+    "method" : "POST",
+    "contentType" : "application/json;charset=UTF-8",
+    "schema" : null,
+    "headers" : [ ],
+    "pathParameters" : [ ],
+    "queryParameters" : [ ],
+    "formParameters" : [ ],
+    "requestFields" : [ {
+      "attributes" : { },
+      "description" : "회원 ID",
+      "ignored" : false,
+      "path" : "id",
+      "type" : "NUMBER",
+      "optional" : false
+    } ],
+    "example" : "{\n  \"id\" : 1\n}",
+    "securityRequirements" : null
+  },
+  "response" : {
+    "status" : 200,
+    "contentType" : "application/json;charset=UTF-8",
+    "schema" : null,
+    "headers" : [ ],
+    "responseFields" : [ ],
+    "example" : "{\"id\":1,\"name\":\"조현철1\",\"email\":\"kkensu@naver.com\"}"
+  },
+  "tags" : [ "api" ]
+}

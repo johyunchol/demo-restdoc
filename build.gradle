@@ -1,8 +1,13 @@
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.4'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'com.epages.restdocs-api-spec' version '0.18.2'
+    id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.example'
@@ -41,7 +46,16 @@ dependencies {
     //json-doclet
     jsondoclet("capital.scalable:spring-auto-restdocs-json-doclet-jdk9:2.0.11")
 
+    implementation "capital.scalable:spring-auto-restdocs-core:2.0.11"
     testImplementation "capital.scalable:spring-auto-restdocs-core:2.0.11"
+
+    testImplementation('com.epages:restdocs-api-spec-mockmvc:0.18.2') //2.2
+
+
+    // swagger
+    swaggerUI 'org.webjars:swagger-ui:4.11.1'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 }
 
 task jsonDoclet(type: Javadoc, dependsOn: compileJava) {
@@ -88,4 +102,38 @@ task prepareDocument(type: Copy) {
 
 build {
     dependsOn prepareDocument
+}
+
+openapi3 {
+    server = 'http://localhost:8080'
+    title = 'Unban TMS Admin'
+    description = 'Unban TMS Admin API description'
+    version = '0.1.0'
+    format = 'json'
+    outputDirectory='src/main/resources/static/docs'
+}
+
+// swagger
+//
+swaggerSources {
+    sample {
+        setInputFile(file("${project.buildDir}/api-spec/openapi3.json"))
+    }
+}
+
+// GenerateSwaggerUI 태스크가, openapi3 task 를 의존하도록 설정
+tasks.withType(GenerateSwaggerUI) {
+    dependsOn 'openapi3'
+}
+tasks.register('copySwaggerUI', Copy) {
+    dependsOn 'generateSwaggerUISample'
+
+    def generateSwaggerUISampleTask = tasks.named('generateSwaggerUISample', GenerateSwaggerUI).get()
+    from("${generateSwaggerUISampleTask.outputDir}")
+    into("src/main/resources/static/docs")
+}
+
+// bootJar 실행 전, copySwaggerUI 를 실행하도록 설정
+tasks.withType(BootJar) {
+    dependsOn 'copySwaggerUI'
 }

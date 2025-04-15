@@ -1,6 +1,10 @@
 package com.example.demo.member;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Setter
@@ -8,5 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberRequestDto {
+
+    /**
+     * 아이디
+     */
     private Long id;
 }

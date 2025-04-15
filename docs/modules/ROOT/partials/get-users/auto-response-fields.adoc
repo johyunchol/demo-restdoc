@@ -4,6 +4,16 @@
 |id
 |Integer
 |true
-|아이디.
+|
+
+|name
+|String
+|true
+|
+
+|email
+|String
+|true
+|
 
 |===

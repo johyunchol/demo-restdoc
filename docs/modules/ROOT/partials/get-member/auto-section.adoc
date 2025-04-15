@@ -1,0 +1,30 @@
+[[resources-get-member]]
+=== 회원 조회
+
+include::auto-method-path.adoc[]
+
+include::auto-description.adoc[]
+
+==== Example request
+
+include::http-request.adoc[]
+
+==== Query parameters
+
+include::auto-request-parameters.adoc[]
+
+==== Request fields
+
+include::auto-request-fields.adoc[]
+
+==== Response fields
+
+include::auto-response-fields.adoc[]
+
+==== Example response
+
+include::http-response.adoc[]
+
+==== Example request
+
+include::curl-request.adoc[]

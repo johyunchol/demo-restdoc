@@ -6,15 +6,20 @@ server:
   shutdown: graceful
   tomcat:
     connection-timeout: 5s
-  servlet:
-    context-path: /cjconnect/admin/api
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
-    application-display-name: cjconnect-admin-api
+#  servlet:
+#    context-path: /cjconnect/admin/api
+#    encoding:
+#      charset: UTF-8
+#      enabled: true
+#      force: true
+#    application-display-name: cjconnect-admin-api
 
-management:
-  metrics:
-    tags:
-      application: api-admin
+#management:
+#  metrics:
+#    tags:
+#      application: api-admin
+
+springdoc:
+  swagger-ui:
+    url: /docs/openapi3.json
+    path: /swagger-ui.html

@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'https://api-admin-stage.unban.ai/cjconnect/admin/api/api/members/1' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "id" : 1
+}'
+----

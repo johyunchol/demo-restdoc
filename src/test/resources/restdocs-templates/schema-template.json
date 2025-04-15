@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+{{#fields}}
+"{{name}}": {
+"type": "{{type}}",
+"description": "{{description}}",
+"example": "{{example}}"
+}{{^last}},{{/last}}
+{{/fields}}
+}
+}

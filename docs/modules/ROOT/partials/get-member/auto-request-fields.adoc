@@ -4,6 +4,6 @@
 |id
 |Integer
 |true
-|아이디.
+|
 
 |===

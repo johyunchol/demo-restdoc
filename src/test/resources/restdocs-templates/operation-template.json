@@ -1,0 +1,27 @@
+{
+  "tags": ["{{tag}}"],
+  "summary": "{{summary}}",
+  "description": "{{description}}",
+  "operationId": "{{operationId}}",
+  "requestBody": {
+    "content": {
+      "{{contentType}}": {
+        "schema": {
+          "$ref": "#/components/schemas/{{requestSchema}}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "{{status}}": {
+      "description": "{{responseDescription}}",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/{{responseSchema}}"
+          }
+        }
+      }
+    }
+  }
+}
